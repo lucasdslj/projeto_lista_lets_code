@@ -1,0 +1,42 @@
+body{
+    background-color: goldenrod;
+}
+
+.titulo{
+    background-color: black;
+    border: 2em;
+    text-align: center;
+    width: 50em;
+    height: 5em;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  
+}
+
+.titulo h1{
+    color: aliceblue;
+    vertical-align: middle;
+}
+
+#task_insert{
+    height: 4em;
+}
+
+.riscado{
+    text-decoration: line-through;
+}
+
+
+
+.ocultar{
+    display: none;
+}
+
+#card_checkbox_all h5{
+    display: inline;
+}
+
