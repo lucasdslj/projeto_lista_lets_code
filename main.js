@@ -3,31 +3,55 @@ let input_tarefa = document.querySelector('#task_insert')
 let div_painel = document.querySelector('#painel')
 
 
+function set_db(tarefas) {
+    localStorage.setItem('lista', JSON.stringify(tarefas))
+}
+
+
 function get_bd(){
     let banco
-    if (banco = localStorage.getItem('lista')) {
+    if (banco = JSON.parse(localStorage.getItem('lista'))) {
         return banco
     }else{
         return []
     }
 }
 
+
 // localStorage.getItem('lixeira')
 
 
-let taf = {
-    tarefa: 'Estudar para a prova',
-    indice: 0
-}
+let taf =   [
+                {
+                    tarefa: 'Estudar para a prova',
+                    indice: 0
+                },
+                {
+                    tarefa: 'Apresentação do case de conclusão do lets code',
+                    indice: 1
+                },
+                {
+                    tarefa: 'Ir à praia',
+                    indice: 2
+                },
 
-function set_db(tarefas) {
-    localStorage.setItem('lista', tarefas)
-}
+            ]
 
-set_db(taf)
+
+// set_db(taf)
+
+
+let dados = get_bd()
+// console.log(dados[-1].tarefa); 
+// dados.push({tarefa: "jksjsdj", indice: 10})
+console.log( dados.length)
+
+
 
 
 let indice = 0;
+
+// insere_tarefa()
 
 
 function insere_tarefa(tarefa, index) {
@@ -64,6 +88,10 @@ function name(params) {
     
 }
 
+dados.forEach(element => {
+    insere_tarefa(element.tarefa, element.index)
+});
+
 btn_add_tarefa.addEventListener('click', function(event){
     let conteudo_tarefa = input_tarefa.value
     console.log(div_painel.childElementCount);
@@ -73,7 +101,18 @@ btn_add_tarefa.addEventListener('click', function(event){
         alert("Digite a sua tarefa!")
     }else{
         document.querySelector('#card_checkbox_all').classList.remove('ocultar')
-        insere_tarefa(conteudo_tarefa, indice++)
+        let banco = get_bd()
+        banco.push({tarefa: conteudo_tarefa, indice: banco[banco.length-1].indice+1})
+        
+        set_db(banco)
+        
+        banco = get_bd()
+        banco.forEach(element => {
+            insere_tarefa(element.tarefa, element.index)
+        });
+        
+
+        // insere_tarefa(conteudo_tarefa, indice++)
         console.log("não sou vazio e fui clicado");
         input_tarefa.value =  ''
     }
